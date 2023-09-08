@@ -15,16 +15,16 @@ class SignInControoler{
         if(emailAddress.isEmpty){}
         if(password.isEmpty){}
         try{
-          final credential=await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailAddress, password: password);
-          if(credential.user==null){
-
-          }
-          if(!credential.user!.emailVerified){
-
-          }
-          var user=credential.user;
-          if(user!=null){}
-          else{}
+          // final credential=await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailAddress, password: password);
+          // if(credential.user==null){
+          //
+          // }
+          // if(!credential.user!.emailVerified){
+          //
+          // }
+          // var user=credential.user;
+          // if(user!=null){}
+          // else{}
         }catch(e){
           print(e);
         }
