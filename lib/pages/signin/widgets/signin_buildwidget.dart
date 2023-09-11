@@ -56,7 +56,7 @@ _reusableIconImage("https://th.bing.com/th?id=OIP.gZzA2Bibe-iMguIEps9rRgHaI0&w=2
   }
 
 
-  Widget buildTextField(String hintText,String  textType,IconData icons){
+  Widget buildTextField(String hintText,String  textType,IconData icons,Function (String)? func){
   return Container(
     margin: EdgeInsets.only(bottom: 20.5),
     padding: EdgeInsets.only(left: 17.w),
@@ -78,6 +78,10 @@ _reusableIconImage("https://th.bing.com/th?id=OIP.gZzA2Bibe-iMguIEps9rRgHaI0&w=2
         Expanded(child: Container(
           height: 50.h,
           child: TextField(
+            onChanged: (va){
+              func!(va);
+
+            },
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               helperText: hintText,
