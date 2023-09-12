@@ -2,12 +2,12 @@ import 'package:eccommerce2/common/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-AppBar buildAppBarWidget(){
+AppBar buildAppBarWidget(String name){
   return AppBar(
     elevation: 0,
     backgroundColor: Colors.white,
 
-    title: Text("Login",style: TextStyle(color: AppColors.primaryText),),
+    title: Text(name,style: TextStyle(color: AppColors.primaryText),),
     bottom: PreferredSize(
       preferredSize: Size.fromHeight(1),
       child: Container(

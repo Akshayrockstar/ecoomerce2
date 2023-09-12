@@ -1,4 +1,6 @@
 import 'package:eccommerce2/blocs/blocs.dart';
+import 'package:eccommerce2/pages/app_providers.dart';
+import 'package:eccommerce2/pages/registeration/register_page.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
 import 'package:eccommerce2/pages/signin/signin%20_page.dart';
 import 'package:eccommerce2/pages/welcome/bloc/bloc.dart';
@@ -36,16 +38,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-  providers: [
-    BlocProvider(
-      create: (context) => WelcomePagebloc(),
-    ),
-    BlocProvider(
-      create: (context) => AppBloc(),
-    ),BlocProvider(
-      create: (context) => SignInBloc(),
-    ),
-  ],
+  providers:AppBlocProviders.appBlocProviders,
   child: ScreenUtilInit(
         builder: (context,child){
           return  MaterialApp(
@@ -65,6 +58,7 @@ class MyApp extends StatelessWidget {
             routes: {
               "myHomePage":(context)=>MyHomePage(),
               "signIn":(context)=>SigninPage(),
+              "register":(contect)=>RegisterPage(),
 
             },
             home: WelocomePage(

@@ -1,65 +1,67 @@
+import 'package:eccommerce2/pages/registeration/bloc/register_bloc.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
-import 'package:eccommerce2/pages/signin/sign_in_controller.dart';
 import 'package:eccommerce2/pages/signin/widgets/signin_buildwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SigninPage extends StatelessWidget {
-  const SigninPage({Key? key}) : super(key: key);
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print("Loading akshay is here");
-    return BlocBuilder<SignInBloc, SignInState>(
+    return BlocBuilder<RegisterBloc, RegisterState>(
       builder: (context, state) {
-        return
-          Container(
+        return Container(
           color: Colors.white,
           child: SafeArea(
             child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: buildAppBarWidget("Sign In"),
+              appBar: buildAppBarWidget("Sign Up"),
               body: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 20.h,),
-                    buildThirdPartyLogin(context),
-                    SizedBox(height: 13.h,),
                     Center(child: reusableText(
-                        "or use your email account to login")),
+                        "Enter your details below for ")),
                     SizedBox(height: 30.h,),
                     Container(
                       padding: const EdgeInsets.only(left: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          reusableText("Email"),
-                          SizedBox(height: 5.h,),
+                          reusableText("User Name"),
+
                           buildTextField(
-                              "Enter Email address", "", Icons.person,(va){
-                                context.read<SignInBloc>().add(EmailEvent(va));
+                              "Enter UserName", "", Icons.person, (va) {
+                            context.read<RegisterBloc>().add(UserName(va));
+                          }),
+                          reusableText("Email"),
+
+                          buildTextField(
+                              "Enter Email", "", Icons.email, (va) {
+                            context.read<RegisterBloc>().add(Email(va));
                           }),
 
                           reusableText("Password"),
-                          SizedBox(height: 5.h,),
+
                           buildTextField(
-                              "Enter Your Password", "password", Icons.lock,(va){
-                          context.read<SignInBloc>().add(PasswordEvent(va));
+                              "Enter Your Password", "password", Icons.lock, (
+                              va) {
+                            context.read<RegisterBloc>().add(Password(va));
+                          }),
+                          reusableText("Conform Password"),
+
+                          buildTextField(
+                              "Enter Your Conform Password", "password",
+                              Icons.lock, (va) {
+                            context.read<RegisterBloc>().add(ConfirmPassword(va));
                           }),
                           forgotTextButton(),
                           SizedBox(height: 30.h,),
-                          loginAndRegisterButton("Login", "login",(){
-                            SignInControoler(context: context).signInHandleer("email");
 
-
-
-
-
-                          }),
-                          SizedBox(height: 15.h,),
-                          loginAndRegisterButton("Register", "",(){
+                          loginAndRegisterButton("Register", "login", () {
                             Navigator.of(context).pushNamed("register");
                           }),
 
