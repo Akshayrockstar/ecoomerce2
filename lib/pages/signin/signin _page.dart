@@ -1,4 +1,5 @@
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
+import 'package:eccommerce2/pages/signin/sign_in_controller.dart';
 import 'package:eccommerce2/pages/signin/widgets/signin_buildwidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,9 +49,18 @@ class SigninPage extends StatelessWidget {
                           }),
                           forgotTextButton(),
                           SizedBox(height: 30.h,),
-                          loginAndRegisterButton("Login", "login"),
+                          loginAndRegisterButton("Login", "login",(){
+                            SignInControoler(context: context).signInHandleer("email");
+
+
+
+
+
+                          }),
                           SizedBox(height: 15.h,),
-                          loginAndRegisterButton("Register", ""),
+                          loginAndRegisterButton("Register", "",(){
+                            print("Akshays workout");
+                          }),
 
                         ],
                       ),

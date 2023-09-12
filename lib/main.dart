@@ -7,17 +7,25 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'firebase_options.dart';
 
 import 'blocs/events.dart';
 import 'blocs/state.dart';
+import 'package:flutter/foundation.dart';
+
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   // options: DefaultFirebaseOptions.currentPlatform,
-  //
-  // );
+  // Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+        apiKey: Constants.apiKey,
+        appId: Constants.appId,
+        messagingSenderId: Constants.messagingSenderId,
+        projectId: Constants.projectId),
+
+  );
   runApp(const MyApp());
 }
 
@@ -142,4 +150,10 @@ class MyHomePage extends StatelessWidget {
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+class Constants {
+  static String appId = " ";
+  static String apiKey = "AIzaSyDFKHRRFOtnfK3nLQfV8-oxLHepMNR0fvc";
+  static String messagingSenderId = " ";
+  static String projectId = " ";
 }

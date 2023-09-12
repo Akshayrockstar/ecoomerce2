@@ -27,12 +27,12 @@ class SignInControoler{
           else{}
         }catch(e){
           print(e);
-        }
+          print("the 2nd error check$e");}
       }
 
     }
   catch(e){
-      print(e);
+      print("the last error check$e");
   }
   }
 

@@ -142,9 +142,11 @@ _reusableIconImage("https://th.bing.com/th?id=OIP.gZzA2Bibe-iMguIEps9rRgHaI0&w=2
   );
 
   }
-  Widget loginAndRegisterButton(String buttonName,String buttonType){
+  Widget loginAndRegisterButton(String buttonName,String buttonType,Function onTap ){
   return GestureDetector(
-    onTap: (){},
+    onTap: (){
+      onTap();
+    },
     child: Container(
       height: 50.h,
       width: 350.w,
