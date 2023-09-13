@@ -1,4 +1,5 @@
 import 'package:eccommerce2/pages/registeration/bloc/register_bloc.dart';
+import 'package:eccommerce2/pages/registeration/register_controller.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
 import 'package:eccommerce2/pages/signin/widgets/signin_buildwidget.dart';
 import 'package:flutter/material.dart';
@@ -62,7 +63,7 @@ class RegisterPage extends StatelessWidget {
                           SizedBox(height: 30.h,),
 
                           loginAndRegisterButton("Register", "login", () {
-                            Navigator.of(context).pushNamed("register");
+                            RegisterController(context: context).handleEmailRegiste();
                           }),
 
                         ],
