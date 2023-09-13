@@ -9,6 +9,9 @@ part 'register_state.dart';
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   RegisterBloc() : super(RegisterState()) {
     on<UserName>(_userNameEvent);
+    on<Email>(_emailEvent);
+    on<Password>(_passwordEvent);
+    on<ConfirmPassword>(_confirmEvent);
   }
  void _userNameEvent(UserName event,Emitter<RegisterState> emit){
     return emit(state.copyWith(username: event.username));
