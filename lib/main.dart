@@ -9,6 +9,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'application/application.dart';
+import 'common/routes/pages.dart';
 import 'firebase_options.dart';
 
 import 'blocs/events.dart';
@@ -55,16 +57,17 @@ class MyApp extends StatelessWidget {
               // is not restarted.
               primarySwatch: Colors.blue,
             ),
-            routes: {
-              "myHomePage":(context)=>MyHomePage(),
-              "signIn":(context)=>SigninPage(),
-              "register":(contect)=>RegisterPage(),
-
-            },
-            home: WelocomePage(
-
-
-            ),
+            // routes: {
+            //   "myHomePage":(context)=>MyHomePage(),
+            //   "signIn":(context)=>SigninPage(),
+            //   "register":(contect)=>RegisterPage(),
+            //
+            // },
+            onGenerateRoute: Pages.generateRouteSettings,
+            // home: ApplicationDartFile(
+            //
+            //
+            // ),
           );
         },
       ),
