@@ -77,7 +77,8 @@ _reusableIconImage("https://th.bing.com/th?id=OIP.gZzA2Bibe-iMguIEps9rRgHaI0&w=2
         ),
         Expanded(child: Container(
           height: 50.h,
-          child: TextField(
+          child:
+          TextField(
             onChanged: (va){
               func!(va);
 

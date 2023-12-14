@@ -1,6 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:eccommerce2/common/values/colors.dart';
+import 'package:eccommerce2/common/values/constants.dart';
 import 'package:eccommerce2/main.dart';
+import 'package:eccommerce2/pages/global.dart';
 import 'package:eccommerce2/pages/welcome/bloc/bloc.dart';
 import 'package:eccommerce2/pages/welcome/bloc/events.dart';
 import 'package:eccommerce2/pages/welcome/bloc/state.dart';
@@ -124,6 +126,7 @@ class _WelocomePageState extends State<WelocomePage> {
               //             MaterialPageRoute(builder: (context) =>
               //              MyHomePage()
               //             ));
+              Global.storageServices.setBool(AppConstants.torage_device_open_firsttime, true);
               Navigator.of(context).pushNamedAndRemoveUntil("signIn", (route) => false);
 
 

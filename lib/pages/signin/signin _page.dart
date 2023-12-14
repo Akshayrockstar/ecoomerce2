@@ -60,7 +60,7 @@ class SigninPage extends StatelessWidget {
                           }),
                           SizedBox(height: 15.h,),
                           loginAndRegisterButton("Register", "",(){
-                            Navigator.of(context).pushNamed("register");
+                            Navigator.of(context).pushNamed("/sign_up");
                           }),
 
                         ],

@@ -1,5 +1,6 @@
 import 'package:eccommerce2/blocs/blocs.dart';
 import 'package:eccommerce2/pages/app_providers.dart';
+import 'package:eccommerce2/pages/global.dart';
 import 'package:eccommerce2/pages/registeration/register_page.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
 import 'package:eccommerce2/pages/signin/signin%20_page.dart';
@@ -20,16 +21,7 @@ import 'package:flutter/foundation.dart';
 
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await Firebase.initializeApp(
-    options: FirebaseOptions(
-        apiKey: Constants.apiKey,
-        appId: Constants.appId,
-        messagingSenderId: Constants.messagingSenderId,
-        projectId: Constants.projectId),
-
-  );
+  Global.init();
   runApp(const MyApp());
 }
 

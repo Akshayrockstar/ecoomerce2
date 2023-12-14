@@ -1,6 +1,8 @@
 import 'package:eccommerce2/application/application.dart';
+import 'package:eccommerce2/application/bloc/application_bloc.dart';
 
 import 'package:eccommerce2/main.dart';
+import 'package:eccommerce2/pages/global.dart';
 import 'package:eccommerce2/pages/registeration/bloc/register_bloc.dart';
 import 'package:eccommerce2/pages/registeration/register_page.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
@@ -15,7 +17,7 @@ import 'names.dart';
 class Pages{
   static List<PageEntity>routs=[
     PageEntity(page:WelocomePage() , bloc:   BlocProvider(create: (context) => WelcomePagebloc(),), route: Approutes.iniitial),
-    PageEntity(page:ApplicationDartFile() , route: Approutes.application),
+    PageEntity(page:ApplicationDartFile() ,bloc: BlocProvider(create: (context) => ApplicationBloc(),), route: Approutes.application),
     PageEntity(page:SigninPage() , bloc:   BlocProvider(create: (context) => SignInBloc(),), route: Approutes.signin),
     PageEntity(page:RegisterPage() , bloc:   BlocProvider(create: (context) => RegisterBloc(),), route: Approutes.signup)
 
@@ -34,6 +36,16 @@ class Pages{
       //check for route name  when navigator get triggered
       var result=routs.where((element) => element.route==settings.name);
       if(result.isNotEmpty){
+        bool deviceFirstOpen=Global.storageServices.getDeviceFirstOpen();
+        if(result.first.route==Approutes.iniitial && deviceFirstOpen){
+          bool isLogined=Global.storageServices.getisLogidIn();
+          // if(isLogined){
+          //   return MaterialPageRoute(builder: (context) => ApplicationDartFile(),settings: settings);
+          //
+          // }
+
+          return MaterialPageRoute(builder: (context) => SigninPage(),settings: settings);
+        }
         return MaterialPageRoute(builder: (_)=>result.first.page,settings: settings);
       }
 

@@ -1,4 +1,6 @@
+import 'package:eccommerce2/common/values/constants.dart';
 import 'package:eccommerce2/common/widgets/toasts.dart';
+import 'package:eccommerce2/pages/global.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +25,7 @@ class SignInControoler{
         }
         try{
           final credential=await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailAddress, password: password);
+          print("user!=null case cr$credential");
           if(credential.user==null){
             toastInfo(msg: "you are not a user ");
             return;
@@ -35,22 +38,24 @@ class SignInControoler{
           }
           var user=credential.user;
           if(user!=null){
-            print("the user exist");
+            print("user!=null case");
+            // Global.storageServices.setString(AppConstants.torage_device_open_firsttime, "12345");
+          Navigator.of(context).pushNamedAndRemoveUntil("/application", (route) => false);
           }
           else{}
         }on FirebaseAuthException catch(e){
           print("the code is${e.code}");
           if(e.code=="user-not-found"){
-            print("No user found theat email");
+
 
             toastInfo(msg: "No user found that email");
           }
-          else if(e.code=="'wrong-password"){
-            print("the entered password is wrong");
+          else if(e.code=="wrong-password"){
+
             toastInfo(msg: "the entered password is wrong");
           }
           else if(e.code=="invalid-email"){
-            print("the email is invalid");
+
             toastInfo(msg: "the email is invalid");
           }
         }
