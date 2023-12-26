@@ -1,6 +1,8 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:eccommerce2/common/values/colors.dart';
+import 'package:eccommerce2/home/bloc/main_home_page_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Widget buildAppBAr(){
@@ -135,7 +137,8 @@ Widget serachView(){
 
 }
 
-Widget sliderView(){
+Widget sliderView(BuildContext
+     context, MainHomePageState state){
   return Column(
     children: [
       Container(
@@ -143,6 +146,9 @@ Widget sliderView(){
         width: 725.w,
         margin: EdgeInsets.only(top: 20.h),
         child: PageView(
+          onPageChanged: (index){
+            context.read<MainHomePageBloc>().add(HomePageDots(index));
+          },
           children: [
             _sliderViewContainer(path: "https://static.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg"),
             _sliderViewContainer(path: "https://th.bing.com/th/id/OIP.nBBABfTYuzj2DrsaqZ7pJgAAAA?pid=ImgDet&w=182&h=182&c=7&dpr=1.3"),
@@ -155,9 +161,9 @@ Widget sliderView(){
       ),
       Container(
         child: DotsIndicator(
-          dotsCount: 3,position: 0,
+          dotsCount: 3,position: state.index,
            decorator:DotsDecorator(
-             color: AppColors.primaryElementText,
+             color: Colors.grey,
              activeColor: AppColors.primaryElement,
              size: Size.square(5),
              activeSize: Size(17,5),
@@ -183,4 +189,94 @@ image: NetworkImage(path,)
 )
 ),
 );
+}
+Widget menuView(){
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        width: 325.w,
+        margin: EdgeInsets.only(
+          top: 15.h
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _reUsableSubTitleText("Choose Your course"),
+            _reUsableSubTitleText("See All",clr: AppColors.primaryThreeElementText,fontSize: 10),
+
+
+
+
+          ],
+        ),
+       
+      ),
+     Container(
+       child: Row(
+         children: [
+           _reUSableMenuText("All"),
+           SizedBox(width: 5.w,),
+           _reUSableMenuText("Popular",bagroundClr:Colors.white ,textColor: Colors.grey.withOpacity(.6)),
+           SizedBox(width: 5.w,),
+           _reUSableMenuText("Newest",bagroundClr:Colors.white ,textColor: Colors.grey.withOpacity(.6)),
+         ],
+       ),
+     )
+    ],
+  );
+}
+Widget _reUsableSubTitleText(String text,{ Color clr=AppColors.primaryText,double fontSize=16}){
+  return      Container(
+      child: Text(text,style: TextStyle(
+      color: clr,
+      fontWeight: FontWeight.bold,
+      fontSize: fontSize.sp
+  ),));
+
+
+}
+Widget _reUSableMenuText(
+    String text,{Color textColor=Colors.white,Color bagroundClr=AppColors.primaryElement}
+    ){
+  return Container(
+    decoration: BoxDecoration(
+        color: bagroundClr,
+        borderRadius: BorderRadius.circular(7.w),border: Border.all(color:bagroundClr)
+    ),
+
+    child: _reUsableSubTitleText(text,clr: textColor,),
+    padding: EdgeInsets.only(left: 8.w,right: 8.w,top: 5.h,bottom: 5.h),
+  );
+}
+
+
+Widget gridViewDesign(){
+  return  Container(
+    padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5.w),
+        image: DecorationImage(image: NetworkImage("https://th.bing.com/th?id=OIP.IOGGKcmJMYKPkMuimQDLnwHaHv&w=244&h=255&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2",),fit: BoxFit.fill)
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          child: Text("Best course for IT",maxLines: 1,
+              overflow: TextOverflow.fade,
+              softWrap: false,
+              textAlign: TextAlign.left,
+              style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
+        ),   Container(
+          child: Text("Flutter best course",maxLines: 1,
+              overflow: TextOverflow.fade,
+              softWrap: false,
+              textAlign: TextAlign.left,
+
+              style: TextStyle(color: AppColors.primaryFourElementText,fontWeight: FontWeight.normal)),
+        )
+      ],
+    ),
+  );
 }

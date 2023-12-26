@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
   child: ScreenUtilInit(
         builder: (context,child){
           return  MaterialApp(
+            debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(
               // This is the theme of your application.
