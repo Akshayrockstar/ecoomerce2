@@ -18,4 +18,7 @@ return    _prefd.getBool(AppConstants.torage_device_open_firsttime)??false;
 }bool getisLogidIn(){
 return    _prefd.getString(AppConstants.USER_LOGINED)==null?false:true;
 }
+ Future<bool> remove(String key){
+return   _prefd.remove(key);
+}
 }

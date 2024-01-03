@@ -3,6 +3,8 @@ import 'package:eccommerce2/application/bloc/application_bloc.dart';
 
 import 'package:eccommerce2/main.dart';
 import 'package:eccommerce2/pages/global.dart';
+import 'package:eccommerce2/pages/profile/setting/bloc/settings_bloc.dart';
+import 'package:eccommerce2/pages/profile/setting/settings.dart';
 import 'package:eccommerce2/pages/registeration/bloc/register_bloc.dart';
 import 'package:eccommerce2/pages/registeration/register_page.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
@@ -19,7 +21,8 @@ class Pages{
     PageEntity(page:WelocomePage() , bloc:   BlocProvider(create: (context) => WelcomePagebloc(),), route: Approutes.iniitial),
     PageEntity(page:ApplicationDartFile() ,bloc: BlocProvider(create: (context) => ApplicationBloc(),), route: Approutes.application),
     PageEntity(page:SigninPage() , bloc:   BlocProvider(create: (context) => SignInBloc(),), route: Approutes.signin),
-    PageEntity(page:RegisterPage() , bloc:   BlocProvider(create: (context) => RegisterBloc(),), route: Approutes.signup)
+    PageEntity(page:RegisterPage() , bloc:   BlocProvider(create: (context) => RegisterBloc(),), route: Approutes.signup),
+    PageEntity(page:SettingPAge() , bloc:   BlocProvider(create: (context) => SettingsBloc(),), route: Approutes.setting)
 
   ];
   //return all the bloc providers

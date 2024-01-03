@@ -1,3 +1,5 @@
+import 'package:eccommerce2/common/routes/names.dart';
+import 'package:eccommerce2/common/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -42,5 +44,43 @@ Widget profileEditIcon(){
       )
 
   ),
+  );
+}
+
+ var imagesInfo=<String,String>{
+  "Settings":"Setting",
+   "Payment":"Payment",
+   "Love":"Love"
+ };
+Widget buildListView(BuildContext ctx){
+  return Column(
+    children: [
+     ...List.generate(imagesInfo.length, (index) =>  GestureDetector(
+       onTap:(){
+         Navigator.of(ctx).pushNamed(Approutes.setting);
+       } ,
+    child: Container(
+      child:Row(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 5.h),
+            height: 30.h,
+            width: 10.w,
+            padding: EdgeInsets.all(7),
+            decoration: BoxDecoration(
+                color: AppColors.primaryElement,
+                borderRadius: BorderRadius.all(Radius.circular(3.w),
+
+                )
+            ),
+            child: Icon(Icons.delete,color: Colors.white,),
+          ),
+          SizedBox(width: 5.w,),
+          Text(imagesInfo.keys.elementAt(index))
+        ],
+      ),
+    ),
+  ))
+    ],
   );
 }

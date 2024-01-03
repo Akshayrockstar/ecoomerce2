@@ -34,7 +34,12 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              profileEditIcon()
+              profileEditIcon(),
+              SizedBox(height: 10.h,),
+              Padding(
+                padding:  EdgeInsets.only(left: 20.w),
+                child: buildListView(context),
+              ),
             ],
           ),
         ),
