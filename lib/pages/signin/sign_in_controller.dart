@@ -1,10 +1,15 @@
+import 'package:eccommerce2/common/entities/user.dart';
 import 'package:eccommerce2/common/values/constants.dart';
 import 'package:eccommerce2/common/widgets/toasts.dart';
 import 'package:eccommerce2/pages/global.dart';
 import 'package:eccommerce2/pages/signin/bloc/sign_in_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+import '../../common/api/user_api.dart';
 
 class SignInControoler{
   final BuildContext context;
@@ -38,9 +43,16 @@ class SignInControoler{
           }
           var user=credential.user;
           if(user!=null){
-            print("user!=null case");
-            // Global.storageServices.setString(AppConstants.torage_device_open_firsttime, "12345");
-          Navigator.of(context).pushNamedAndRemoveUntil("/application", (route) => false);
+            LoginRequestEntity loginRequestEntity=LoginRequestEntity(
+              avatar: user.photoURL,
+              email: user.email,
+              password: "ak9995528886",
+              username: user.displayName,
+
+
+            );
+           asyncPostAlldata(loginRequestEntity);
+
           }
           else{}
         }on FirebaseAuthException catch(e){
@@ -69,5 +81,27 @@ class SignInControoler{
       print("the last error check$e");
   }
   }
+void  asyncPostAlldata(LoginRequestEntity  loginRequestEntity)async{
+    EasyLoading.show(
+      indicator: CircularProgressIndicator(),
+      maskType: EasyLoadingMaskType.clear,
+      dismissOnTap: true
+    );
+    var result =await UserApi.login(params:loginRequestEntity);
+    print("result${result.data}");
 
+    if(result.data["response_code"]==200){
+      try{
+      EasyLoading.dismiss();
+        // Global.storageServices.setString(AppConstants.torage_device_open_firsttime, "12345");
+        Navigator.of(context).pushNamedAndRemoveUntil("/application", (route) => false);
+      }catch(e){
+        print("the error is here$e");
+      }
+    }else{
+      EasyLoading.dismiss();
+      toastInfo(msg: "Unknown error");
+    }
+
+}
 }
