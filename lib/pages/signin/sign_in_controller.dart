@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:eccommerce2/common/entities/user.dart';
 import 'package:eccommerce2/common/values/constants.dart';
 import 'package:eccommerce2/common/widgets/toasts.dart';
@@ -38,7 +40,7 @@ class SignInControoler{
           }
           if(!credential.user!.emailVerified){
             print("emaili not verified");
-            toastInfo(msg: "email not verified ");
+            toastInfo(msg: "email not verified");
 
           }
           var user=credential.user;
@@ -93,7 +95,14 @@ void  asyncPostAlldata(LoginRequestEntity  loginRequestEntity)async{
     if(result.data["response_code"]==200){
       try{
       EasyLoading.dismiss();
+      print("Before assigning in to app constatnt key");
+      print(result.data["data"]["token"].runtimeType);
+
         // Global.storageServices.setString(AppConstants.torage_device_open_firsttime, "12345");
+        Global.storageServices.setString(AppConstants.STORAGE_USER_PROFILE_KEY,jsonEncode(result.data["data"] ));
+
+        // Global.storageServices.setString(AppConstants.STORAGE_USER_TOKEN,result.data["data"]["token"]);
+      print("after assigning in to app constatnt key");
         Navigator.of(context).pushNamedAndRemoveUntil("/application", (route) => false);
       }catch(e){
         print("the error is here$e");

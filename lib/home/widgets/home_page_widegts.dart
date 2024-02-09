@@ -1,4 +1,5 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:eccommerce2/common/entities/user.dart';
 import 'package:eccommerce2/common/values/colors.dart';
 import 'package:eccommerce2/home/bloc/main_home_page_bloc.dart';
 import 'package:flutter/material.dart';
@@ -251,7 +252,7 @@ Widget _reUSableMenuText(
 }
 
 
-Widget gridViewDesign(){
+Widget gridViewDesign(CourseModel model){
   return  Container(
     padding: EdgeInsets.symmetric(horizontal: 12.w,vertical: 12.h),
     decoration: BoxDecoration(
@@ -263,13 +264,13 @@ Widget gridViewDesign(){
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          child: Text("Best course for IT",maxLines: 1,
+          child: Text(model.code??"",maxLines: 1,
               overflow: TextOverflow.fade,
               softWrap: false,
               textAlign: TextAlign.left,
               style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
         ),   Container(
-          child: Text("Flutter best course",maxLines: 1,
+          child: Text(model?.name??"",maxLines: 1,
               overflow: TextOverflow.fade,
               softWrap: false,
               textAlign: TextAlign.left,

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:eccommerce2/common/entities/user.dart';
 import 'package:eccommerce2/common/values/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,5 +23,19 @@ return    _prefd.getString(AppConstants.USER_LOGINED)==null?false:true;
 }
  Future<bool> remove(String key){
 return   _prefd.remove(key);
+}
+getUserToken(){
+
+    return _prefd.getString(AppConstants.STORAGE_USER_TOKEN)??"";
+}
+getUserProfile(){
+    var profileOffline=_prefd.getString(AppConstants.STORAGE_USER_PROFILE_KEY);
+    if(profileOffline?.isNotEmpty==true){
+      return      UserData.fromJson(jsonDecode(profileOffline!));
+
+
+    }
+    return UserData();
+
 }
 }

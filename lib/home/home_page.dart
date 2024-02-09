@@ -1,5 +1,6 @@
 import 'package:eccommerce2/common/values/colors.dart';
 import 'package:eccommerce2/home/bloc/main_home_page_bloc.dart';
+import 'package:eccommerce2/home/home_controller.dart';
 import 'package:eccommerce2/home/widgets/home_page_widegts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +14,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late HomeController _homeController;
+  @override
+  void initState() {
+
+    _homeController=HomeController(context: context);
+    _homeController.intit();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -43,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                     SliverToBoxAdapter(
                       child: Container(
                         margin: EdgeInsets.only(top: 1.h),
-                        child: Text("dbestech", style: TextStyle(
+                        child: Text(_homeController.userProfile?.name??"", style: TextStyle(
                             color: AppColors.primaryText,
                             fontSize: 14.sp
                         ),),
@@ -63,8 +73,8 @@ class _HomePageState extends State<HomePage> {
 
                         },
                         child:
-                        gridViewDesign()
-                      ),childCount: 4) ,
+                        gridViewDesign(state.courseList[index])
+                      ),childCount: state.courseList.length) ,
 
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisSpacing: 5.w,

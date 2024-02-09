@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:eccommerce2/common/values/constants.dart';
+import 'package:eccommerce2/pages/global.dart';
 
 class  HttpUtil{
   static final HttpUtil _instance=HttpUtil._internl();
@@ -18,15 +20,38 @@ class  HttpUtil{
     // dio=Dio(options);
 
   }
+  Map<String,dynamic>getAuthorizarionHeadre(){
+    var headers=<String,dynamic>{};
+    String accessToken=Global.storageServices.getUserToken();
+    print("accessToken$accessToken");
+    if(accessToken.isNotEmpty){
+      headers['Authorization']="$accessToken";
+      return headers;
+    }
 
-  Future post( String path,{dynamic data,Map<String ,dynamic>? queryParameters,}) async {
+    print("http$headers");
+    return headers;
+
+  }
+
+  Future post( String path,{dynamic data,Map<String ,dynamic>? queryParameters,Options? options}) async {
+
+    Options reQuestOptions=options??Options();
+    reQuestOptions.headers=reQuestOptions.headers??{};
+
+    Map<String,dynamic>authorization=getAuthorizarionHeadre();
+    print("SSSSSSSSSSSSSSSSSSSS$path");
+    if(authorization!=null){
+      reQuestOptions.headers!.addAll(authorization);
+    }
+
     print("SSSSSSSSSSSSSSSSSSSS$path");
     try {
-      var response= await dio.post("https://api-uat-user.sidrabazar.com/user-employee_employeeuserorglogin/sidracart",queryParameters: queryParameters,data: {
+      var response= await dio.get(path,queryParameters: queryParameters,data: {
         "email": "team7@sidrabusiness.com",
         "password": "team7@2024",
         "code": "EMPY231"
-      });
+      },options: reQuestOptions);
       print("dddddddddd$response");
       return response;
 
